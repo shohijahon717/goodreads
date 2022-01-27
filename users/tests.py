@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth import get_user
 
 
 class RegistrationTestCase(TestCase):
@@ -83,7 +84,61 @@ class RegistrationTestCase(TestCase):
 
 
 
+class LoginTestCase(TestCase):
+    def test_successful_login(self):
+        db_user = User.objects.create(username='shoh')
+        db_user.set_password('admin123')
+        db_user.save()
 
+        self.client.post(
+            reverse('users:login'),
+            data={
+                'username': 'shoh',
+                'password': 'admin123'
+            }
+        )
+
+        user = get_user(self.client)
+
+        self.assertTrue(user.is_authenticated)
+
+
+
+    def test_wrong_credentials(self):
+        db_user = User.objects.create(username='shoh')
+        db_user.set_password('admin123')
+        db_user.save()
+
+        self.client.post(
+            reverse('users:login'),
+            data={
+                'username': 'xatousername',
+                'password': 'admin123'
+            }
+        )
+        
+        user = get_user(self.client)
+
+        self.assertFalse(user.is_authenticated)
+
+        self.client.post(
+            reverse('users:login'),
+            data={
+                'username': 'shoh',
+                'password': 'xatoparol'
+            }
+        )
+        user = get_user(self.client)
+
+        self.assertFalse(user.is_authenticated)
+        
+
+
+
+
+        
+
+        
 
 
 
