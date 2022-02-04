@@ -18,7 +18,7 @@ class RegisterView(View):
         create_form = UserCreateForm(data=request.POST)
         if create_form.is_valid():
             create_form.save()
-            return redirect('users:login')      
+            return redirect('users:login')
         else:
             context = {
                 "form": create_form,
@@ -32,11 +32,9 @@ class LoginView(View):
         context = {'login_form': login_form}
         return render(request, 'users/login.html', context)
 
-
     def post(self, request):
-       
-        login_form = AuthenticationForm(data = request.POST)    
-        context  = {'login_form': login_form}
+        login_form = AuthenticationForm(data=request.POST)
+        context = {'login_form': login_form}
         if login_form.is_valid():
             user = login_form.get_user()
             login(request, user)
