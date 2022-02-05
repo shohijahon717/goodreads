@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import login 
 from django.contrib.auth.forms import AuthenticationForm
@@ -43,5 +44,14 @@ class LoginView(View):
         else:
             return render(request, 'users/login.html', context)
 
-        
-        
+
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+
+        context = {
+            "user": request.user,
+        }
+        return render(request, "users/profile.html", context)
+
+    def post(self, request):
+        pass
