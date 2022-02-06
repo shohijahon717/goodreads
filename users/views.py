@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.contrib.auth import login 
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 from django.views import View
 from .forms import UserCreateForm
-
+from django.contrib import messages
 
 class RegisterView(View):
     def get(self, request):
@@ -39,8 +39,8 @@ class LoginView(View):
         if login_form.is_valid():
             user = login_form.get_user()
             login(request, user)
-
-            return redirect('landing_page')
+            messages.success(request, "Siz saytga muvaffaqiyatli kirdingiz!")
+            return redirect('books:list')
         else:
             return render(request, 'users/login.html', context)
 
@@ -53,5 +53,10 @@ class ProfileView(LoginRequiredMixin, View):
         }
         return render(request, "users/profile.html", context)
 
-    def post(self, request):
-        pass
+
+class LogoutView(LoginRequiredMixin, View):
+    def get(self, request):
+        logout(request)
+
+        messages.info(request, "Siz saytdan muvaffaqiyatli chiqdingiz!")
+        return redirect('landing_page')
