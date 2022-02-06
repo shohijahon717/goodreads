@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Goodreads Kloni{% endblock title %}</title>
+</head>
+<body>
+
+
+
+
+{% if messages %}
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+{% endif %}
+
+<h2><a href="{% url "landing_page" %}">Goodreads</a></h2>
+
+<p>
+
+    <a href="{% url 'books:list' %}">Books</a>
+    /<a href="{% url 'users:profile' %}">Profile</a>
+
+    {% if not request.user.is_authenticated %}
+
+    /<a href="{% url 'users:register' %}">Register</a>
+    /<a href="{% url 'users:login' %}">Login</a>
+    {% else %}
+    /<a href="{% url 'users:logout' %}">Logout</a>
+    {% endif %}
+
+</p>
+
+{% block content %}
+
+
+{% endblock content %}
+</body>
+</html>
