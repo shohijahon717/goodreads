@@ -11,6 +11,8 @@
     {% csrf_token %} 
     {{ login_form.as_p }}
     <button type="submit">Kirish</button>
+
+    <span class="ms-3">Akkauntingiz yo'qmi, <a href="{% url 'users:register' %}">ro'yxatdan o'ting</a></span>
 </form>
 {% endblock content %}
 </body>
