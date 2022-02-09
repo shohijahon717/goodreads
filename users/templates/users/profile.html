@@ -4,8 +4,7 @@
 
 {% block content %}
     <br>
-    <img src="{{ user.profile_image.url }}" style="height: 200px;
-    width: 200px; border-radius: 50%" alt="Profile Picture">
+    <img class='profile-pic' src="{{ user.profile_image.url }}" alt="Profile Picture">
     
     <div>
         <a href="{% url 'users:profile-edit' %}" >edit profile </a>
