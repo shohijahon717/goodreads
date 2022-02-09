@@ -3,12 +3,19 @@
 {% block title %}Profile {% endblock %}
 
 {% block content %}
-<h1>Profile</h1>
-
-<p>Username: {{ user.username }}</p>
-<p>First name: {{ user.first_name }}</p>
-<p>Last name {{ user.last_name }}</p>
-<p>Email {{ user.email }}</p>
+    <br>
+    <img src="{{ user.profile_image.url }}" style="height: 200px;
+    width: 200px; border-radius: 50%" alt="Profile Picture">
+    
+    <div>
+        <a href="{% url 'users:profile-edit' %}" >edit profile </a>
+    </div>
+    <h1>Profile</h1>
+    
+    <p>Username: {{ user.username }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name {{ user.last_name }}</p>
+    <p>Email {{ user.email }}</p>
 
 {% endblock content %}
 </body>

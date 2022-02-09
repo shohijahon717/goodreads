@@ -4,8 +4,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 from django.views import View
-from .forms import UserCreateForm
+from .forms import UserCreateForm, UserUpdateForm
 from django.contrib import messages
+
 
 class RegisterView(View):
     def get(self, request):
@@ -60,3 +61,31 @@ class LogoutView(LoginRequiredMixin, View):
 
         messages.info(request, "Siz saytdan muvaffaqiyatli chiqdingiz!")
         return redirect('landing_page')
+
+
+class ProfileUpdateView(View):
+    def get(self, request):
+        user_update_form = UserUpdateForm(instance=request.user)
+
+        context = {"form": user_update_form}
+
+        return render(request, "users/profile_edit.html", context)
+
+    def post(self, request):
+        user_update_form = UserUpdateForm(
+            instance=request.user,
+            data=request.POST,
+            files=request.FILES
+        )
+        if user_update_form.is_valid():
+            user_update_form.save()
+            messages.success(request, "Sizning profilingiz muvaffaqiyatli yangilandi.")
+            return redirect('users:profile')
+        context = {"form": user_update_form}
+        return render(request, "users/profile_edit.html", context)
+
+
+
+
+
+

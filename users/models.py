@@ -1,5 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-from django.contrib.auth.models import User
 
-User._meta.get_field('email')._unique = True
+class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
+    profile_image = models.ImageField(default="default_profile.jpg")
+
+
+
