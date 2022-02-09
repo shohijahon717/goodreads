@@ -15,6 +15,7 @@ class UserCreateForm(forms.ModelForm):
         return user
 
 
+
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser

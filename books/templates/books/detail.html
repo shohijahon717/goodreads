@@ -5,9 +5,11 @@
 <body>
 {% block content %}
 
-<h1>{{ book.title }}</h1>
-<br>
-<p>{{ book.description }}</p>
+    <h1>{{ book.title }}</h1>
+    <img class='default-book' src="{{ book.cover_picture.url }}" alt="Kitob rasmi">
+
+    <br>
+    <p>{{ book.description }}</p>
 {% endblock content %}
 </body>
 </html>

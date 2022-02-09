@@ -12,7 +12,6 @@ class BooksView(ListView):
     context_object_name = 'books'
 
 
-
 # class BooksView(View):
 #     def get(self, request):
 #         books = Book.objects.all()
