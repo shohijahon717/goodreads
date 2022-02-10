@@ -71,21 +71,24 @@
 </nav>
 
 
-{% if messages %}
-    <div class="mt-4">
-{% for message in messages %}
-    <div class="alert alert-{{ message.tags }}" role="alert">
-    {{ message }}
-    </div>
 
-{% endfor %}
-    </div>
-{% endif %}
+<div class="container">
+    {% if messages %}
+        <div class="mt-4">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+            </div>
 
-{% block content %}
+        {% endfor %}
+            </div>
+    {% endif %}
 
+    {% block content %}
 
-{% endblock content %}
+    {% endblock content %}
+</div>
+
 
 
 <!-- JavaScript Bundle with Popper -->

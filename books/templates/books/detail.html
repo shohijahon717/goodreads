@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
 {% block title %}Book Detail{% endblock %}
-}
+
 <body>
 {% block content %}
 
-    <h1>{{ book.title }}</h1>
-    <img class='default-book' src="{{ book.cover_picture.url }}" alt="Kitob rasmi">
-
     <br>
-    <p>{{ book.description }}</p>
+    <div class="row">
+        <div class="col-2">
+            <img class='default-book' style="height: 250px; width: 200px" src="{{ book.cover_picture.url }}" alt="Kitob rasmi">
+        </div>
+        <div class="col-6 ms-3">
+            <h3>{{ book.title }}</h3>
+            <br>
+            <p>{{ book.description }}</p>
+        </div>
+    </div>
+
+
 {% endblock content %}
 </body>
 </html>
