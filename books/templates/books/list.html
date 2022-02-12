@@ -5,28 +5,54 @@
 {% block content %}
 <h1>Books</h1>
 
+{% if page_obj %}
 
+    {% for book in page_obj %}
 
-
-
-
-{% if books %}
-
-    {% for book in books %}
         <div class="row mb-4">
+
             <div class="col-2">
+                <br><br>
                 <img class="default-book" src="{{ book.cover_picture.url }}" >
 
             </div>
             <div class="col-6 ms-4">
+            <br><br>
                 <h3><a href="{% url 'books:detail' book.id %}">{{ book.title }}</a> </h3>
                 <p>
                     {{ book.description }}
                 </p>
 
             </div>
-    {% endfor %}
+
         </div>
+        
+    {% endfor %}
+
+    <nav aria-label="...">
+      <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+        </li>
+      {% endif %}
+{#        <li class="page-item"><a class="page-link" href="#">1</a></li>#}
+        <li class="page-item active" aria-current="page">
+
+          <a class="page-link" href="#">{{ page_obj.number }}</a>
+        </li>
+{#        <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+      {% endif %}
+      </ul>
+    </nav>
+
+
+
+
 
 
 {% else %}
@@ -35,4 +61,3 @@ No books found.
 
 {% endblock content %}
 </body>
-</html>
