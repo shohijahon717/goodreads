@@ -32,19 +32,24 @@
     <nav aria-label="...">
       <ul class="pagination">
       {% if page_obj.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+         <li class="page-item">
+          <a class="page-link" href="{% url 'books:list' %}?page=1">&laquo; birinchi</a>
         </li>
+        <li class="page-item">
+          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.previous_page_number }}">oldingi</a>
+        </li>
+
       {% endif %}
-{#        <li class="page-item"><a class="page-link" href="#">1</a></li>#}
         <li class="page-item active" aria-current="page">
 
           <a class="page-link" href="#">{{ page_obj.number }}</a>
         </li>
-{#        <li class="page-item"><a class="page-link" href="#">3</a></li>#}
       {% if page_obj.has_next %}
         <li class="page-item">
-          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.next_page_number }}">Next</a>
+          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.next_page_number }}">keyingi</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="{% url 'books:list' %}?page={{ page_obj.paginator.num_pages }}">oxirgi</a>
         </li>
       {% endif %}
       </ul>
