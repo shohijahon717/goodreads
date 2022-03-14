@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -18,12 +19,19 @@ from .forms import BookCreateForm
 class BooksView(View):
     def get(self, request):
         books = Book.objects.all().order_by('id')
-        page_size = request.GET.get('page_size', 2)
+        search_query = request.GET.get('q', '')
+        if search_query:
+            books = books.distinct().filter(Q(title__icontains=search_query) |
+                                            Q(description__icontains=search_query))
+
+        page_size = request.GET.get('page_size', 4)
         paginator = Paginator(books, page_size)
+
         page_num = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_num)
         context = {
             'page_obj': page_obj,
+            'search_query': search_query
         }
         return render(request, 'books/list.html', context)
 

@@ -4,17 +4,25 @@
 <body>
 {% block content %}
 <h1>Books</h1>
+<div class="row mb-3">
+    <div class="col-4">
+
+        <form method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control form-control-lg" placeholder="Qidirish..." name="q" value="{{ search_query }}">
+                <button type="submit" class="input-group-text btn-success"><i class="bi bi-search me-2"></i>Qidirish</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 {% if page_obj %}
-
     {% for book in page_obj %}
-
         <div class="row mb-4">
-
             <div class="col-2">
                 <br><br>
                 <img class="default-book" src="{{ book.cover_picture.url }}" >
-
             </div>
             <div class="col-6 ms-4">
             <br><br>
