@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}Book Detail{% endblock %}
 
 <body>
@@ -17,7 +17,34 @@
         </div>
     </div>
 
+    <div class="row mb-4">
+        <p>Izoh qoldirish:</p>
+        <div class="col-6">
+            <form method="post" action="{% url 'books:reviews' book.id %}">
+                {% csrf_token %}
+                {{ review_form | crispy }}
+                <button type="submit" class="btn btn-success">Izoh qo'shish</button>
+            </form>
+        </div>
+    </div>
+    {% if book.bookreview_set.exists %}
+    <h4>Izohlar</h4>
+    {% endif %}
 
+    <hr>
+
+    {% for review in book.bookreview_set.all %}
+        <div class="row mb-3">
+            <div class="col-1 me-2">
+                <img style="width: 100px; height: 100px" src="{{ review.user.profile_image.url }}" alt="Profil rasmi">
+            </div>
+            <div class="col-7">
+                <b>{{ review.user.username }}</b> rated it {{ review.stars_given }} stars <span class="fw-lighter">{{ review.created_at }}</span>
+                <p class="mt-2 font-monospace">{{ review.comment }}</p>
+            </div>
+        </div>
+
+    {% endfor %}
 {% endblock content %}
 </body>
 </html>
