@@ -11,7 +11,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('home/', home_page, name='home_page')
-
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
