@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
 
-
+    "rest_framework",
     'books',
     'users',
+    'api',
+
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -148,5 +150,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'shohijahonyodgorov2141@gmail.com'
+EMAIL_HOST_PASSWORD = 'fxvxdwbzjcufrwhn'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 
